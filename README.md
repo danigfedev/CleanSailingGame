@@ -1,2 +1,8 @@
 # CleanSailingGame
-Sailing sandbox prototype
+ Welcome to Clean Sailing repository! 
+ 
+Clean Sailing is a simple sandbox prototype where you control a boat and your main task is to keep Paradise Island's coasts as clean from rubbish as possible.
+
+The main purpose of this small project is to play around with water behaviour and all it involves (water material design, floatin objects, boat controller, etc), as well as a bunch of different Unity's specific techniques and tools such as Post Processing, Lightweight Render Pipeline, Shader Graph and VFX/Particle systems, among others.
+
+Throughout the development stages of the project, I will try to follow to the extent possible a structured and well organized workflow, starting with a brief and really basic Game Design Document (included in this repository as well) defining the different aspects of the game (art style, game mechanics, npc and controllable characters/objects, game modes...).
