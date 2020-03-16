@@ -1,0 +1,2 @@
+# CleanSailingGame
+Sailing sandbox prototype
