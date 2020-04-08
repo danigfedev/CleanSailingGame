@@ -9,24 +9,36 @@ public class BoatController : MonoBehaviour
     public float rotationSpeed = 25;
 
     private Rigidbody rb;
+    private float initialDrag;
+    private float initialRotationDrag;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        initialDrag = rb.drag;
+        initialRotationDrag = rb.angularDrag;
+
     }
 
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float verticalAxis = Input.GetAxis("Vertical");
         float horizontalAxis = Input.GetAxis("Horizontal");
-        Debug.Log(verticalAxis);
-        rb.velocity = (transform.forward * verticalAxis) * boatSpeed; // * Time.deltaTime;//new Vector3(rb.velocity.x, rb.velocity.y, verticalAxis * boatSpeed);
+        rb.velocity = (transform.forward * verticalAxis) * boatSpeed;// * Time.fixedDeltaTime;//new Vector3(rb.velocity.x, rb.velocity.y, verticalAxis * boatSpeed);
         transform.Rotate((transform.up * horizontalAxis) * rotationSpeed * Time.fixedDeltaTime);
+    }
+
+    public void ResetColliderValues()
+    {
+        rb.drag = initialDrag;
+        rb.angularDrag = initialRotationDrag;
+    }
+
+    public void OverrideColliderValues(float _drag, float _angularDrag)
+    {
+        rb.drag = _drag;
+        rb.angularDrag = _angularDrag;
     }
 }
