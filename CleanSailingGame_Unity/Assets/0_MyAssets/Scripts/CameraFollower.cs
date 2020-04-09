@@ -14,8 +14,6 @@ public class CameraFollower : MonoBehaviour
     public float cameraMinHeight = 0.25f;
     public float damping = 5;
     public float rotationDamping = 8;
-    //private Vector3 idleCamPosition;
-    //private float
 
     private void Start()
     {
