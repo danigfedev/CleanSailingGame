@@ -1,20 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//Description: Simulates water movement (up and down)
+
 using UnityEngine;
 
 public class WaterBehaviour : MonoBehaviour
 {
-    public float waterPressure = 3f;
-    public float waterDrag = 1;
-    public float angularDrag = 1.0f;
+    public float amplitude = 0.5f;
+    public float speed = 1.0f;
 
-    //private collider
-
-    private void Start()
+    private void Update()
     {
-        waterPressure = waterPressure / 10f;
+        Vector3 oldPos = transform.position;
+        transform.position = new Vector3(oldPos.x, Mathf.Sin(Time.time*speed) * amplitude, oldPos.z);
     }
 
+    //Returns current water level
+    public float GetWaterLevel()
+    {
+        return transform.position.y;
+    }
+
+
+    /*
     private void OnTriggerEnter(Collider _collider)
     {
 
@@ -51,8 +57,10 @@ public class WaterBehaviour : MonoBehaviour
             //Add forces 
 
             //Vector3 forceDir = transform.forward + new Vector3(Random.Range(-1, 2)*0.01f, Random.Range(-1, 2), 0);
-            _collider.transform.parent.GetComponent<Rigidbody>().AddForce(waterPressure * /*forceDir*/transform.forward, ForceMode.Impulse);
+            _collider.transform.parent.GetComponent<Rigidbody>().AddForce(waterPressure * transform.forward, ForceMode.Impulse);
         }
            
     }
+    */
+
 }
