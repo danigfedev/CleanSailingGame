@@ -1,49 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+//Class Description: Controls camera translation and rotation, following the player's boat
+
 using UnityEngine;
 
 public class CameraFollower : MonoBehaviour
 {
+    #region *** Public Fields ***
+
     public Transform target;
-    public Transform targetIdle;
     public Rigidbody boatRigidBody;
-    //public float maxDistance = 1.5f;
-    //public float minDistance = 1.5f;
-    public float distance = 1.5f;
+    public float fwdDistance = 3f;
+    public float rearDistance = 5f;
     public float cameraRelativeHeight = 0.5f;//Height relative to target
-    public float cameraMinHeight = 0.25f;
     public float damping = 5;
     public float rotationDamping = 8;
+    
+    #endregion
+
+    private float distance;
 
     private void Start()
     {
-        transform.position = target.TransformPoint(0, cameraMinHeight, -distance);
-        //transform.position = targetIdle.TransformPoint(0, cameraRelativeHeight, -distance);
+        distance = fwdDistance;
+        transform.position = target.TransformPoint(0, cameraRelativeHeight, -distance);
         transform.LookAt(target);
     }
 
-    private void /*LateUpdate*/FixedUpdate()
+    private void FixedUpdate()
     {
-
         //Calculate desired position
         Vector3 wantedPosition;
         Quaternion wantedRotation;
-        if (boatRigidBody.velocity.magnitude > 0.1f)
+        float _verInput = Input.GetAxisRaw("Vertical");
+        if (_verInput < 0)
         {
-            float _verInput = Input.GetAxisRaw("Vertical");
-            wantedPosition = target.TransformPoint(0, cameraRelativeHeight, -distance * _verInput);
-            wantedRotation = Quaternion.LookRotation(target.position - transform.position, target.up);
+            _verInput = Mathf.Floor(_verInput);
+            distance = rearDistance;
         }
         else
         {
-            //wantedPosition = targetIdle.TransformPoint(0, cameraRelativeHeight, -distance);
-            wantedPosition = target.TransformPoint(0, cameraMinHeight, -distance);
-            wantedRotation = Quaternion.LookRotation(targetIdle.position - transform.position, target.up);
+            _verInput = 1;
+            distance = fwdDistance;
         }
-        transform.position = Vector3.Lerp(transform.position, wantedPosition, /*Time.deltaTime*/Time.fixedDeltaTime * damping);
+        wantedPosition = target.TransformPoint(0, cameraRelativeHeight, -distance * _verInput);
+        wantedRotation = Quaternion.LookRotation(target.position - transform.position, target.up);
+
+        //Smooth translation
+        transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.fixedDeltaTime * damping);
 
         //Smooth rotation
-        //Quaternion wantedRotation = Quaternion.LookRotation(target.position - transform.position, target.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, wantedRotation, Time.deltaTime * rotationDamping);
 
     }
