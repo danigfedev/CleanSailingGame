@@ -21,9 +21,9 @@ public class CameraFollower : MonoBehaviour
 
     private void Start()
     {
-        distance = fwdDistance;
-        transform.position = target.TransformPoint(0, cameraRelativeHeight, -distance);
-        transform.LookAt(target);
+        //distance = fwdDistance;
+        //transform.position = target.TransformPoint(0, cameraRelativeHeight, -distance);
+        //transform.LookAt(target);
     }
 
     private void FixedUpdate()
