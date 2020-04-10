@@ -6,23 +6,44 @@ using UnityEngine.AI;
 
 public class RubbishSpawner : MonoBehaviour
 {
-    public float radius = 100;
+    //public float radius = 100;
+
     public Vector3 center;
     public GameObject[] rubbishPrefabList;
     public BoatPropierties boatPropierties;
 
-    // Update is called once per frame
-    void Update()
+    #region Singleton pattern
+
+    public static RubbishSpawner instance = null;
+
+    // Game Instance Singleton
+    public static RubbishSpawner Instance
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        get
         {
-            Vector3 _point = GetRandomPoint();
-            InstantiateObjectAt(_point);                
+            return instance;
         }
     }
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    #endregion
+
+    //void Update()
+    //{
+    //    if (Input.GetKeyUp(KeyCode.Space))
+    //    {
+    //        Debug.Log("Trying to instantiate");
+    //        Vector3 _point = GetRandomPoint();
+    //        InstantiateObjectAt(_point);
+    //    }
+    //}
+
     //Gets a valid random position inside NavMesh
-    public Vector3 GetRandomPoint()
+    public Vector3 GetRandomPoint(float _maxRadius, float _scaleFactor)
     {
         bool _validPoint = false;
         Vector3 _randomPoint = Vector3.zero;
@@ -30,10 +51,10 @@ public class RubbishSpawner : MonoBehaviour
         //Loop until retrieved positionis valid
         do
         {
-            _randomPoint = center + Random.insideUnitSphere * radius;
+            _randomPoint = center + Random.insideUnitSphere * _maxRadius * _scaleFactor;
             _randomPoint.y = 0;
             NavMeshHit hit;
-            if(NavMesh.SamplePosition(_randomPoint, out hit, 0.5f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(_randomPoint, out hit, 1f, NavMesh.AllAreas))
             {
                 _validPoint = true;
                 _randomPoint = hit.position;
@@ -41,7 +62,8 @@ public class RubbishSpawner : MonoBehaviour
             }
         }
         while (!_validPoint);
-        
+
+        _randomPoint.y = 0;
         return _randomPoint;
     }
 
