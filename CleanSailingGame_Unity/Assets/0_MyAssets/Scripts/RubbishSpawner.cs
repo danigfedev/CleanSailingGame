@@ -9,6 +9,7 @@ public class RubbishSpawner : MonoBehaviour
     public float radius = 100;
     public Vector3 center;
     public GameObject[] rubbishPrefabList;
+    public BoatPropierties boatPropierties;
 
     // Update is called once per frame
     void Update()
@@ -52,6 +53,7 @@ public class RubbishSpawner : MonoBehaviour
         //GameObject pawnInstance = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //Instantiate(GameObject.CreatePrimitive(PrimitiveType.Sphere));
         pawnInstance.transform.position = _pos;
+        pawnInstance.GetComponentInChildren<RubbishBehaviour>().BoatPropierties = boatPropierties;
     }
 
 }

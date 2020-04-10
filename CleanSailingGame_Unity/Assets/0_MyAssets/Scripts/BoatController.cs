@@ -5,6 +5,8 @@ public class BoatController : MonoBehaviour
 {
     #region **** Public Fields ****
 
+    public BoatPropierties boatPropierties; //Not inbtegrated in script yet
+
     //Audio fields:
     public AudioSource boatAudioSource;
     public AudioClip idleClip;
@@ -74,9 +76,9 @@ public class BoatController : MonoBehaviour
             float xRotation = throttleRotationCurve.Evaluate(throttleTimeOffset * throttleRotationSpeed) * maxXRotation * -verticalAxis;
             xRotationController.localRotation = Quaternion.Euler(xRotation + throttleRotationOffset, xRotationController.localRotation.y, xRotationController.localRotation.z);
 
-            //Rotate boat:
+            //Steering:
             float horizontalAxis = Input.GetAxis("Horizontal");
-            transform.Rotate((transform.up * horizontalAxis) * steerSpeed * Time.fixedDeltaTime);
+            transform.Rotate((transform.up * horizontalAxis * _boatDirectionFactor) * steerSpeed * Time.fixedDeltaTime);
             
             //If steering: rotate around z axis
             float zRot = Mathf.Lerp(zRotationController.localRotation.z, -horizontalAxis * maxZSteerRotation, zRotationDamping);

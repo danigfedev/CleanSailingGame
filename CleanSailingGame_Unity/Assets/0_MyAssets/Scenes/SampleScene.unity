@@ -26214,6 +26214,7 @@ MonoBehaviour:
   - {fileID: 1668036487450676934, guid: 41d69ba71d43bb84596382128d54f23c, type: 3}
   - {fileID: 6010401787966043298, guid: 40713b9afce612b44bbdf5de8ce1b17b, type: 3}
   - {fileID: 7331589702594432875, guid: a03e8edf82ffe1847a77c5c75f5c4b1c, type: 3}
+  boatPropierties: {fileID: 11400000, guid: 8940badc572f9ed48b060e4a276f1aad, type: 2}
 --- !u!4 &2117632461
 Transform:
   m_ObjectHideFlags: 0
@@ -27382,6 +27383,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4660884386154083927, guid: df1a9b33d312c274cb8ab5ccc6df2968,
+        type: 3}
+      propertyPath: boatPropierties
+      value: 
+      objectReference: {fileID: 11400000, guid: 8940badc572f9ed48b060e4a276f1aad,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df1a9b33d312c274cb8ab5ccc6df2968, type: 3}
 --- !u!1001 &5581548879279451653

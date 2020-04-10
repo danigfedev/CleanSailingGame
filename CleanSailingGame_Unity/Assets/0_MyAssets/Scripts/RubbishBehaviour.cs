@@ -4,27 +4,29 @@ using UnityEngine;
 
 public class RubbishBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private BoatPropierties boatPropierties;
+    public BoatPropierties BoatPropierties
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        get { return boatPropierties; }
+        set { boatPropierties = value; }
     }
 
     private void OnTriggerEnter(Collider _collider)
     {
-        Debug.Log("Something entered");
-
         if (_collider.tag == "Player")
         {
-            //TODO Update points/cargo/whatever
-            //if(!maxCapacityReached) pick rubbish
-            Destroy(gameObject);
+            // Update points/cargo/whatever
+            if(boatPropierties.currentCargo < boatPropierties.maxCargoCapacity)
+            {
+                Destroy(gameObject);
+                boatPropierties.currentCargo++;
+                Debug.Log("Rubbish picked: " + boatPropierties.currentCargo + " / " + boatPropierties.maxCargoCapacity);
+            }
+            else
+            {
+                Debug.Log("Max Cargo reached");
+            }
+                
         }
     }
 }
