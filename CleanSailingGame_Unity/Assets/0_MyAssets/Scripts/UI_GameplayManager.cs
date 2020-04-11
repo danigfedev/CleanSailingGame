@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class UI_GameplayManager : MonoBehaviour
 {
+
+    //public Material WaterMaterial;
+    //public Material originalMaterial;
+    //public Color damageWaterColor;
+    //private Color originalWaterWolor;
+
     public BoatController currentBoatController;
     public GameStatusData gameData;
 
@@ -43,7 +49,10 @@ public class UI_GameplayManager : MonoBehaviour
         levelText.text = "Lvl " + gameData.currentLevel;
         objectiveText.text = gameData.cargoObjective.ToString();
         waterHealthImage.fillAmount = gameData.waterHealth / (float)100;
+
         cargoText.text = currentBoatProperties.currentCargo + " / " + currentBoatProperties.maxCargoCapacity;
+
+        if (gameData.waterHealth < 0) GameplayManager.Instance.PlayerLose();
         
     }
 

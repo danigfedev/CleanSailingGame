@@ -18,13 +18,13 @@ public class RubbishBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (applyDamage)
+        if (applyDamage && GameplayManager.Instance.playing)
         {
             timeCounter += Time.deltaTime;
             if (timeCounter > 1)// apply fraction of damage every 1 sec
             {
                 timeCounter = 0;
-                gameData.waterHealth -= 1 / rubbishPropierties.damage;
+                gameData.waterHealth -= rubbishPropierties.damage / rubbishPropierties.destructionTime;
             }
         }
     }

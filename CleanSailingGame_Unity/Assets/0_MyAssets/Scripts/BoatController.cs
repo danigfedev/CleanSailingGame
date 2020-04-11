@@ -56,11 +56,11 @@ public class BoatController : MonoBehaviour
         //Move:
         float verticalAxis = Input.GetAxis("Vertical");
         int _boatDirectionFactor = 1;
-        float _boatSpeed = boatMaxSpeed;
+        float _boatSpeed = boatPropierties.maxFwdSpeed;//boatMaxSpeed;
         if (verticalAxis < 0)
         {
             _boatDirectionFactor = -1;
-            _boatSpeed = rearMaxSpeed;
+            _boatSpeed = boatPropierties.maxRearSpeed;//rearMaxSpeed;
         }
 
         if (!playing) verticalAxis = 0;
@@ -81,7 +81,7 @@ public class BoatController : MonoBehaviour
 
             //Steering:
             float horizontalAxis = Input.GetAxis("Horizontal");
-            transform.Rotate((transform.up * horizontalAxis * _boatDirectionFactor) * steerSpeed * Time.fixedDeltaTime);
+            transform.Rotate((transform.up * horizontalAxis * _boatDirectionFactor) * boatPropierties.maxSteerVelocity/*steerSpeed*/ * Time.fixedDeltaTime);
             
             //If steering: rotate around z axis
             float zRot = Mathf.Lerp(zRotationController.localRotation.z, -horizontalAxis * maxZSteerRotation, zRotationDamping);

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61695437a6aa2f0428312eb73ca891bb, type: 3}
   m_Name: BasicBoat
   m_EditorClassIdentifier: 
-  currentCargo: 10
-  maxCargoCapacity: 10
-  maxFwdSpeed: 20
+  currentCargo: 0
+  maxCargoCapacity: 5
+  maxFwdSpeed: 5
   maxRearSpeed: 5
   maxSteerVelocity: 100

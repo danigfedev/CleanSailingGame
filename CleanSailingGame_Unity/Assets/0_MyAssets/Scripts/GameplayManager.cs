@@ -1,27 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
+//Class description: Handles gamplay core functionality
+
 using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
+    [HideInInspector]
+    public bool playing = false;
     public GameStatusData gameData;
+    public BoatPropierties currentBoatPropierties;
     public CameraFollower cameraFollower;
     public GameObject dockController;
     public BoatController currentBoatController;
+    public UI_GameplayStatusMenuManager gameplayStatusCanvasController;
     [Range(1, 4)]
     public int gameLevel = 1;
-    public float limitsMaxRadius = 102.15f;
+    public float limitsMaxRadius = 102.15f;    
 
     public float maxSpawnTime = 10;//seconds
     public int[] levelCargoObjectives;
-    
 
-    private bool playing = false;
+    
     private int maxLevel = 4; //Hardcoded
     private float scaleFactor = 1;
-    private BoatPropierties currentBoatPropierties;
-
+    private float initialBoatFwdSpeed;
+    private float initialBoatRearSpeed;
+    private float initialBoatSteerSpeed;
+    private int initialBoatCargo;
+    private int initialBoatMaxCapacity;
     private float timeCounter = 0;
+    public float spawnTimeSpeed = 1;
 
     #region Singleton pattern
 
@@ -45,6 +53,13 @@ public class GameplayManager : MonoBehaviour
         UpdateGameStatus(playing);
         //UpdateScaleFactor();
         SetGameLevel();
+
+        initialBoatFwdSpeed = currentBoatPropierties.maxFwdSpeed;
+        initialBoatRearSpeed = currentBoatPropierties.maxRearSpeed;
+        initialBoatSteerSpeed = currentBoatPropierties.maxSteerVelocity;
+        initialBoatCargo = currentBoatPropierties.currentCargo;
+        initialBoatMaxCapacity = currentBoatPropierties.maxCargoCapacity;
+
         ResetBoatParameters();
     }
 
@@ -52,13 +67,19 @@ public class GameplayManager : MonoBehaviour
     {
         if (playing)
         {
-            timeCounter += Time.deltaTime;
+            timeCounter += Time.deltaTime * spawnTimeSpeed;
             if (timeCounter > maxSpawnTime / gameLevel)
             {
                 timeCounter = 0;
                 SpawnRubbish();
 
             }
+
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                PlayerPause();
+            }
+
         }
         
     }
@@ -66,16 +87,20 @@ public class GameplayManager : MonoBehaviour
     [ContextMenu("Set Game level")]
     public void SetGameLevel()
     {
+        if (gameLevel > maxLevel)
+        {
+            PlayerWin();
+            return;
+        }
+
         gameData.currentLevel=gameLevel;
-        UpdateCargoObjective();
+        UpdateBoatProperties();
         UpdateScaleFactor();
         UpdateWaterHealth();
         //Limits: SetGameLevel
         LimitBarrierController.Instance.DrawLimits(limitsMaxRadius, scaleFactor);
         LimitBarrierController.Instance.AdjustLimitsScale(scaleFactor);
-
     }
-
 
     public void StartGame()
     {
@@ -85,6 +110,11 @@ public class GameplayManager : MonoBehaviour
         //TODO Enable Gameplay Canvas
     }
 
+    public void ResumeGameplay()
+    {
+        playing = true;
+        UpdateGameStatus(playing);
+    }
 
     public void UpdateCargoFromDock()
     {
@@ -100,7 +130,35 @@ public class GameplayManager : MonoBehaviour
             //if level == 5 -> you win
             SetGameLevel();
         }
-        ResetBoatParameters();
+        currentBoatPropierties.currentCargo = 0;
+        //ResetBoatParameters();
+    }
+
+    public void PlayerWin()
+    {
+        playing = false;
+        UpdateGameStatus(playing);
+        gameplayStatusCanvasController.SetTitleText("You Win");
+        gameplayStatusCanvasController.restartButton.SetActive(true);
+        gameplayStatusCanvasController.gameObject.SetActive(true);
+    }
+
+    public void PlayerLose()
+    {
+        playing = false;
+        UpdateGameStatus(playing);
+        gameplayStatusCanvasController.SetTitleText("You Lose");
+        gameplayStatusCanvasController.restartButton.SetActive(true);
+        gameplayStatusCanvasController.gameObject.SetActive(true);
+    }
+
+    private void PlayerPause()
+    {
+        playing = false;
+        UpdateGameStatus(playing);
+        gameplayStatusCanvasController.SetTitleText("Pause");
+        gameplayStatusCanvasController.resumeButton.SetActive(true);
+        gameplayStatusCanvasController.gameObject.SetActive(true);
     }
 
     private void UpdateGameStatus(bool _playStatus)
@@ -115,14 +173,24 @@ public class GameplayManager : MonoBehaviour
         scaleFactor = (float)gameLevel / (float)maxLevel;
     }
 
-    private void ResetBoatParameters()
+    public void ResetBoatParameters()
     {
-        currentBoatPropierties = currentBoatController.boatPropierties;
-        currentBoatPropierties.currentCargo = 0;
+        currentBoatPropierties.maxFwdSpeed = initialBoatFwdSpeed;
+        currentBoatPropierties.maxRearSpeed = initialBoatRearSpeed;
+        currentBoatPropierties.maxSteerVelocity = initialBoatSteerSpeed;
+        currentBoatPropierties.currentCargo = initialBoatCargo;
+        currentBoatPropierties.maxCargoCapacity = initialBoatMaxCapacity;
     }
 
-    private void UpdateCargoObjective()
+    private void UpdateBoatProperties()
     {
+        if (gameLevel > 1)
+        {
+            currentBoatPropierties.maxCargoCapacity += 5;
+            currentBoatPropierties.maxFwdSpeed += 5;
+        }
+
+        //Update Objective (now fixed by user)
         switch (gameLevel)
         {
             case 1:
@@ -154,7 +222,8 @@ public class GameplayManager : MonoBehaviour
         }
         else
         {
-            gameData.waterHealth += 15;//Recover 15% of health after completing each level
+            gameData.waterHealth += 20;//Recover 15% of health after completing each level
+            if (gameData.waterHealth > 100) gameData.waterHealth = 100;
         }
     }
 }
