@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61695437a6aa2f0428312eb73ca891bb, type: 3}
-  m_Name: BasicBoat
+  m_Script: {fileID: 11500000, guid: 7b317af784057b94aa10ec5a70ba3886, type: 3}
+  m_Name: GameStatusData
   m_EditorClassIdentifier: 
-  currentCargo: 10
-  maxCargoCapacity: 10
-  maxFwdSpeed: 20
-  maxRearSpeed: 5
-  maxSteerVelocity: 100
+  waterHealth: 100
+  cargoObjective: 0
+  currentLevel: 0

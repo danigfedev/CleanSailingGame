@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
+    public GameStatusData gameData;
     public CameraFollower cameraFollower;
+    public GameObject dockController;
     public BoatController currentBoatController;
     [Range(1, 4)]
     public int gameLevel = 1;
     public float limitsMaxRadius = 102.15f;
+
+    public int[] levelCargoObjectives;
 
     private bool playing = false;
     private int maxLevel = 4; //Hardcoded
@@ -35,7 +39,7 @@ public class GameplayManager : MonoBehaviour
         instance = this;
         //Disable boat controller and camera follower
         UpdateGameStatus(playing);
-        UpdateScaleFactor();
+        //UpdateScaleFactor();
         SetGameLevel();
         ResetBoatParameters();
     }
@@ -53,6 +57,8 @@ public class GameplayManager : MonoBehaviour
     [ContextMenu("Set Game level")]
     public void SetGameLevel()
     {
+        gameData.currentLevel=gameLevel;
+        UpdateCargoObjective();
         UpdateScaleFactor();
 
         //Limits: SetGameLevel
@@ -70,10 +76,29 @@ public class GameplayManager : MonoBehaviour
         //TODO Enable Gameplay Canvas
     }
 
+
+    public void UpdateCargoFromDock()
+    {
+        int cargo = currentBoatPropierties.currentCargo;
+        //substract cargo from objective
+        gameData.cargoObjective -= cargo;
+        //set cargo to zero
+
+        if (gameData.cargoObjective <= 0)
+        {
+            gameLevel++;
+            //Next Level
+            //if level == 5 -> you win
+            SetGameLevel();
+        }
+        ResetBoatParameters();
+    }
+
     private void UpdateGameStatus(bool _playStatus)
     {
         cameraFollower.enabled = _playStatus;
         currentBoatController.playing = _playStatus;
+        dockController.SetActive(_playStatus);
     }
 
     private void UpdateScaleFactor()
@@ -86,4 +111,25 @@ public class GameplayManager : MonoBehaviour
         currentBoatPropierties = currentBoatController.boatPropierties;
         currentBoatPropierties.currentCargo = 0;
     }
+
+    private void UpdateCargoObjective()
+    {
+        switch (gameLevel)
+        {
+            case 1:
+                gameData.cargoObjective = levelCargoObjectives[0];
+                break;
+            case 2:
+                gameData.cargoObjective = levelCargoObjectives[1];
+                break;
+            case 3:
+                gameData.cargoObjective = levelCargoObjectives[2];
+                break;
+            case 4:
+                gameData.cargoObjective = levelCargoObjectives[3];
+                break;
+        }
+    }
+
+   
 }

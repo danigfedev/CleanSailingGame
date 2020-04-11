@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class UI_GameplayManager : MonoBehaviour
 {
     public BoatController currentBoatController;
-    
-    //public GameStatusData gameData;
+    public GameStatusData gameData;
 
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI objectiveText;
@@ -41,9 +40,9 @@ public class UI_GameplayManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        //levelText.text=
-        //objective
-        //Helath
+        levelText.text = "Lvl " + gameData.currentLevel;
+        objectiveText.text = gameData.cargoObjective.ToString();
+        waterHealthImage.fillAmount = gameData.waterHealth;
         cargoText.text = currentBoatProperties.currentCargo + " / " + currentBoatProperties.maxCargoCapacity;
         
 
