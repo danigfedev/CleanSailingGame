@@ -6,12 +6,6 @@ using UnityEngine.UI;
 
 public class UI_GameplayManager : MonoBehaviour
 {
-
-    //public Material WaterMaterial;
-    //public Material originalMaterial;
-    //public Color damageWaterColor;
-    //private Color originalWaterWolor;
-
     public BoatController currentBoatController;
     public GameStatusData gameData;
 

@@ -18,6 +18,7 @@ public class RubbishBehaviour : MonoBehaviour
 
     private void Update()
     {
+        //ApplyDamage;
         if (applyDamage && GameplayManager.Instance.playing)
         {
             timeCounter += Time.deltaTime;
@@ -25,6 +26,7 @@ public class RubbishBehaviour : MonoBehaviour
             {
                 timeCounter = 0;
                 gameData.waterHealth -= rubbishPropierties.damage / rubbishPropierties.destructionTime;
+                GameplayManager.Instance.UpdateWaterColor();
             }
         }
     }

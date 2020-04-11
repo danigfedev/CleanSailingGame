@@ -20,7 +20,12 @@ public class GameplayManager : MonoBehaviour
     public float maxSpawnTime = 10;//seconds
     public int[] levelCargoObjectives;
 
-    
+    public Material WaterMaterial;
+    public float originalWaterBlueChannel = 73;
+    //public Material backupWaterMaterial;
+    //[ColorUsage(true, true)]
+    //public Color damageWaterColor;
+
     private int maxLevel = 4; //Hardcoded
     private float scaleFactor = 1;
     private float initialBoatFwdSpeed;
@@ -46,6 +51,12 @@ public class GameplayManager : MonoBehaviour
 
     #endregion
 
+    private void OnApplicationQuit()
+    {
+        ResetBoatParameters();
+        ResetWaterMaterial();
+    }
+
     public void Awake()
     {
         instance = this;
@@ -61,6 +72,7 @@ public class GameplayManager : MonoBehaviour
         initialBoatMaxCapacity = currentBoatPropierties.maxCargoCapacity;
 
         ResetBoatParameters();
+        ResetWaterMaterial();
     }
 
     void Update()
@@ -180,6 +192,32 @@ public class GameplayManager : MonoBehaviour
         currentBoatPropierties.maxSteerVelocity = initialBoatSteerSpeed;
         currentBoatPropierties.currentCargo = initialBoatCargo;
         currentBoatPropierties.maxCargoCapacity = initialBoatMaxCapacity;
+    }
+
+    public void ResetWaterMaterial()
+    {
+        Color _wantedColor = WaterMaterial.GetColor("Color_7903EFB7");
+        _wantedColor.b = originalWaterBlueChannel / 100;
+        WaterMaterial.SetColor("Color_7903EFB7", _wantedColor);
+    }
+
+    //Changes water's deep color, modifying only its blue channel to achieve that green color
+    public void UpdateWaterColor()
+    {
+        //Color_7903EFB7 = DeepWaterColor
+
+        Color _wantedColor = WaterMaterial.GetColor("Color_7903EFB7");
+        float bChannel = _wantedColor.b;
+        bChannel = Mathf.Clamp(gameData.waterHealth, 0.0f, 73.0f);
+        _wantedColor.b = bChannel / 100;
+
+        //Color _wantedColor = Color.Lerp(startColor, damageWaterColor, _changeFactor);
+        WaterMaterial.SetColor("Color_7903EFB7", _wantedColor);
+    }
+
+    private void ResetWaterColor()
+    {
+
     }
 
     private void UpdateBoatProperties()
