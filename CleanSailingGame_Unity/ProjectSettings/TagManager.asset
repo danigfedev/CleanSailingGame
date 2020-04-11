@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Float
   - FxTemporaire
+  - Organic
+  - Plastic
+  - Glass
   layers:
   - Default
   - TransparentFX

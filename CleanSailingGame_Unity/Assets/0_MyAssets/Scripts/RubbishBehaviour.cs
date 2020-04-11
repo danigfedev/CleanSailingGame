@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RubbishBehaviour : MonoBehaviour
 {
+    public GameObject rubbishFeedback;
     public RubbishPropierties rubbishPropierties;
     public GameStatusData gameData;
     private BoatPropierties boatPropierties;
@@ -44,6 +45,8 @@ public class RubbishBehaviour : MonoBehaviour
             // Update points/cargo/whatever
             if(boatPropierties.currentCargo < boatPropierties.maxCargoCapacity)
             {
+                GameObject _rubbishFeedbackInstance = Instantiate(rubbishFeedback);
+                _rubbishFeedbackInstance.transform.position = transform.position;
                 Destroy(gameObject);
                 boatPropierties.currentCargo++;
                 Debug.Log("Rubbish picked: " + boatPropierties.currentCargo + " / " + boatPropierties.maxCargoCapacity);

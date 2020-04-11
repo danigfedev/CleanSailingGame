@@ -14706,8 +14706,7 @@ MonoBehaviour:
   maxSpawnTime: 10
   levelCargoObjectives: 0a00000014000000320000004b000000
   WaterMaterial: {fileID: 2100000, guid: 025304bfa6c8ed84fadc71e24f816fc8, type: 2}
-  backupWaterMaterial: {fileID: 2100000, guid: 4d8f84dcda0b8ae4da3e23893cc95839, type: 2}
-  damageWaterColor: {r: 0.09198113, g: 0.3679245, b: 0.13236311, a: 0.78431374}
+  originalWaterBlueChannel: 73
   spawnTimeSpeed: 1.5
 --- !u!1001 &324919318
 PrefabInstance:

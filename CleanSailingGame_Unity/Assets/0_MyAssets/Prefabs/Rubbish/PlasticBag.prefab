@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfe1fb098b333f4d8a52c98e7a278cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbishFeedback: {fileID: 7484627729308936778, guid: ff84d37edd003aa4886360ccd45d1533,
+    type: 3}
   rubbishPropierties: {fileID: 11400000, guid: ba92bf073162f444582dfa28abbebf42, type: 2}
   gameData: {fileID: 11400000, guid: 526641560c9569c418b975498bd2e71f, type: 2}
 --- !u!54 &8821704621936416339
@@ -169,7 +171,7 @@ GameObject:
   - component: {fileID: 7331589702594432874}
   m_Layer: 0
   m_Name: PlasticBag
-  m_TagString: Untagged
+  m_TagString: Plastic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

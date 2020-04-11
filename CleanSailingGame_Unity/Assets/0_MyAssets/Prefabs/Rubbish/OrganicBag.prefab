@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1668036487450676935}
   m_Layer: 0
   m_Name: OrganicBag
-  m_TagString: Untagged
+  m_TagString: Organic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,6 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfe1fb098b333f4d8a52c98e7a278cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbishFeedback: {fileID: 7775564180153893432, guid: 011844676343b974eac6275fc9efc3f3,
+    type: 3}
   rubbishPropierties: {fileID: 11400000, guid: f5ffd8deaea50524a82c3b80858d533b, type: 2}
   gameData: {fileID: 11400000, guid: 526641560c9569c418b975498bd2e71f, type: 2}
 --- !u!54 &1128880563394857276
