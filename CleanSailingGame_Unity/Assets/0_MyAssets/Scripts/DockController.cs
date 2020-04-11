@@ -5,6 +5,7 @@ using UnityEngine;
 public class DockController : MonoBehaviour
 {
     public GameObject Canvas;
+    public AudioSource dockAudioSource;
     private bool playerInside = false;
     
     private void Start()
@@ -17,6 +18,7 @@ public class DockController : MonoBehaviour
         Canvas.transform.LookAt(Camera.main.transform);
         if (playerInside && Input.GetKeyUp(KeyCode.E))
         {
+            dockAudioSource.Play();
             GameplayManager.instance.UpdateCargoFromDock();
         }
 

@@ -57581,18 +57581,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 30583752, guid: 63511e9edc0adbe4f8584933fc3c9210, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.058541555
-      objectReference: {fileID: 0}
-    - target: {fileID: 30583752, guid: 63511e9edc0adbe4f8584933fc3c9210, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.050674118
-      objectReference: {fileID: 0}
-    - target: {fileID: 30583752, guid: 63511e9edc0adbe4f8584933fc3c9210, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.06787547
-      objectReference: {fileID: 0}
     - target: {fileID: 4612589583435618206, guid: 63511e9edc0adbe4f8584933fc3c9210,
         type: 3}
       propertyPath: m_LocalPosition.x
