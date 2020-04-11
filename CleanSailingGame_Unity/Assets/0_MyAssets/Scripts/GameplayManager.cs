@@ -12,12 +12,16 @@ public class GameplayManager : MonoBehaviour
     public int gameLevel = 1;
     public float limitsMaxRadius = 102.15f;
 
+    public float maxSpawnTime = 10;//seconds
     public int[] levelCargoObjectives;
+    
 
     private bool playing = false;
     private int maxLevel = 4; //Hardcoded
     private float scaleFactor = 1;
     private BoatPropierties currentBoatPropierties;
+
+    private float timeCounter = 0;
 
     #region Singleton pattern
 
@@ -46,11 +50,12 @@ public class GameplayManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
+        timeCounter += Time.deltaTime;
+        if (timeCounter > maxSpawnTime / gameLevel)
         {
-            Debug.Log("Trying to instantiate");
-            Vector3 _point = RubbishSpawner.Instance.GetRandomPoint(limitsMaxRadius, scaleFactor);
-            RubbishSpawner.Instance.InstantiateObjectAt(_point);
+            timeCounter = 0;
+            SpawnRubbish();
+            
         }
     }
 
@@ -131,5 +136,9 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-   
+   private void SpawnRubbish()
+    {
+        Vector3 _point = RubbishSpawner.Instance.GetRandomPoint(limitsMaxRadius, scaleFactor);
+        RubbishSpawner.Instance.InstantiateObjectAt(_point);
+    }
 }
