@@ -6,17 +6,8 @@ public class LimitBarrierController : MonoBehaviour
 {
 
     public GameObject helpPrefab;
-
-    //[Range(1, 4)]
-    //public int gameLevel = 1;
-
-    //public float limitsMaxRadius = 102.15f;
-
-
     public float maxStep = 2.5f;//in degrees
 
-    //private int maxLevel = 4; //Hardcoded
-    //private float scaleFactor = 1;
     private List<GameObject> limitHelpObjects = new List<GameObject>();
 
 

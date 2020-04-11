@@ -50,13 +50,17 @@ public class GameplayManager : MonoBehaviour
 
     void Update()
     {
-        timeCounter += Time.deltaTime;
-        if (timeCounter > maxSpawnTime / gameLevel)
+        if (playing)
         {
-            timeCounter = 0;
-            SpawnRubbish();
-            
+            timeCounter += Time.deltaTime;
+            if (timeCounter > maxSpawnTime / gameLevel)
+            {
+                timeCounter = 0;
+                SpawnRubbish();
+
+            }
         }
+        
     }
 
     [ContextMenu("Set Game level")]
@@ -65,7 +69,7 @@ public class GameplayManager : MonoBehaviour
         gameData.currentLevel=gameLevel;
         UpdateCargoObjective();
         UpdateScaleFactor();
-
+        UpdateWaterHealth();
         //Limits: SetGameLevel
         LimitBarrierController.Instance.DrawLimits(limitsMaxRadius, scaleFactor);
         LimitBarrierController.Instance.AdjustLimitsScale(scaleFactor);
@@ -140,5 +144,17 @@ public class GameplayManager : MonoBehaviour
     {
         Vector3 _point = RubbishSpawner.Instance.GetRandomPoint(limitsMaxRadius, scaleFactor);
         RubbishSpawner.Instance.InstantiateObjectAt(_point);
+    }
+
+    private void UpdateWaterHealth()
+    {
+        if (gameLevel == 1)
+        {
+            gameData.waterHealth = 100;
+        }
+        else
+        {
+            gameData.waterHealth += 15;//Recover 15% of health after completing each level
+        }
     }
 }

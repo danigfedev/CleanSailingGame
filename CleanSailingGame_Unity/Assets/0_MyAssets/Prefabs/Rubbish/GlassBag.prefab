@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4067884670154046987}
   - component: {fileID: 8511934579022862445}
   - component: {fileID: 6669530512253513182}
+  - component: {fileID: 4523460622899209386}
   m_Layer: 0
   m_Name: rubbish
   m_TagString: Untagged
@@ -107,6 +108,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfe1fb098b333f4d8a52c98e7a278cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubbishPropierties: {fileID: 11400000, guid: 615fcb862cc30424483ecd21cd7cf992, type: 2}
+  gameData: {fileID: 11400000, guid: 526641560c9569c418b975498bd2e71f, type: 2}
+--- !u!54 &4523460622899209386
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326339566939392727}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 100000
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &6010401787582037355
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,10 +42,9 @@ public class UI_GameplayManager : MonoBehaviour
     {
         levelText.text = "Lvl " + gameData.currentLevel;
         objectiveText.text = gameData.cargoObjective.ToString();
-        waterHealthImage.fillAmount = gameData.waterHealth;
+        waterHealthImage.fillAmount = gameData.waterHealth / (float)100;
         cargoText.text = currentBoatProperties.currentCargo + " / " + currentBoatProperties.maxCargoCapacity;
         
-
     }
 
 }

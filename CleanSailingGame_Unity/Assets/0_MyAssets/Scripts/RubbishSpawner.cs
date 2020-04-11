@@ -5,9 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class RubbishSpawner : MonoBehaviour
-{
-    //public float radius = 100;
-
+{   
     public Vector3 center;
     public GameObject[] rubbishPrefabList;
     public BoatPropierties boatPropierties;
@@ -31,16 +29,6 @@ public class RubbishSpawner : MonoBehaviour
     }
 
     #endregion
-
-    //void Update()
-    //{
-    //    if (Input.GetKeyUp(KeyCode.Space))
-    //    {
-    //        Debug.Log("Trying to instantiate");
-    //        Vector3 _point = GetRandomPoint();
-    //        InstantiateObjectAt(_point);
-    //    }
-    //}
 
     //Gets a valid random position inside NavMesh
     public Vector3 GetRandomPoint(float _maxRadius, float _scaleFactor)
