@@ -13,6 +13,7 @@ public class GameplayManager : MonoBehaviour
     private bool playing = false;
     private int maxLevel = 4; //Hardcoded
     private float scaleFactor = 1;
+    private BoatPropierties currentBoatPropierties;
 
     #region Singleton pattern
 
@@ -33,10 +34,10 @@ public class GameplayManager : MonoBehaviour
     {
         instance = this;
         //Disable boat controller and camera follower
-        cameraFollower.enabled = playing;
-        currentBoatController.enabled = playing;
+        UpdateGameStatus(playing);
         UpdateScaleFactor();
         SetGameLevel();
+        ResetBoatParameters();
     }
 
     void Update()
@@ -65,14 +66,24 @@ public class GameplayManager : MonoBehaviour
     {
         playing = true;
         // Enable boat controller and camera follower
-        cameraFollower.enabled = playing;
-        currentBoatController.enabled = playing;
+        UpdateGameStatus(playing);
         //TODO Enable Gameplay Canvas
+    }
 
+    private void UpdateGameStatus(bool _playStatus)
+    {
+        cameraFollower.enabled = _playStatus;
+        currentBoatController.playing = _playStatus;
     }
 
     private void UpdateScaleFactor()
     {
         scaleFactor = (float)gameLevel / (float)maxLevel;
+    }
+
+    private void ResetBoatParameters()
+    {
+        currentBoatPropierties = currentBoatController.boatPropierties;
+        currentBoatPropierties.currentCargo = 0;
     }
 }

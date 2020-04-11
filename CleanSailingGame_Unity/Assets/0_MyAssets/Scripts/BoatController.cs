@@ -6,7 +6,7 @@ public class BoatController : MonoBehaviour
     #region **** Public Fields ****
 
     public BoatPropierties boatPropierties; //Not inbtegrated in script yet
-
+    public bool playing = false;
     //Audio fields:
     public AudioSource boatAudioSource;
     public AudioClip idleClip;
@@ -62,7 +62,10 @@ public class BoatController : MonoBehaviour
             _boatDirectionFactor = -1;
             _boatSpeed = rearMaxSpeed;
         }
-        
+
+        if (!playing) verticalAxis = 0;
+
+
         float lerpSpeed = Mathf.Lerp(rb.velocity.magnitude * _boatDirectionFactor, _boatSpeed * verticalAxis, boatSpeedDamping);
         rb.velocity = (transform.forward) * lerpSpeed;
 
