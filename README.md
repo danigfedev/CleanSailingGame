@@ -1,11 +1,6 @@
 # CleanSailingGame
  
- 
-
-![RemoteIslandCleaningServices_short](https://user-images.githubusercontent.com/37219448/120392435-c96ad380-c330-11eb-9f5b-734d32b92739.gif =500x267)
-
-
-<img src="https://user-images.githubusercontent.com/37219448/120392435-c96ad380-c330-11eb-9f5b-734d32b92739.gif" width="250" height="250"/>
+<img src="https://user-images.githubusercontent.com/37219448/120392435-c96ad380-c330-11eb-9f5b-734d32b92739.gif" width="500" height="267"/>
 
 Welcome to Clean Sailing repository! 
 
