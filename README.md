@@ -4,6 +4,9 @@
 
 ![RemoteIslandCleaningServices_short](https://user-images.githubusercontent.com/37219448/120392435-c96ad380-c330-11eb-9f5b-734d32b92739.gif =500x267)
 
+
+<img src="https://user-images.githubusercontent.com/37219448/120392435-c96ad380-c330-11eb-9f5b-734d32b92739.gif" width="250" height="250"/>
+
 Welcome to Clean Sailing repository! 
 
 Clean Sailing is a simple sandbox prototype where you control a boat and your main task is to keep Paradise Island's coasts as clean from rubbish as possible.
